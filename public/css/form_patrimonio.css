@@ -1,0 +1,40 @@
+:root {
+    --bg: lightblue;
+}
+
+body {
+    background: var(--bg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+form {
+    background: rgba(255, 255, 255, 0.583);
+    color: black;
+    font-size: 1em;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 80%;
+    text-align: center;
+
+}
+#photo {
+    width: 20rem;
+    height: 15rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 2rem auto;
+    transition: .5s;
+}
+#photo:hover {
+    transform: scale(1.2);
+    border-radius: 1rem;
+}
+#img {
+    max-width: 30rem;
+    margin: 2rem auto;
+    border: dashed black 1px;
+    border-radius: 1rem;
+    background: transparent;
+    padding: 1rem;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Patrimonio</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+	<?php
+		$links = $this->css();
+		foreach($links as $link){
+			echo $link;
+		}
+	?>
+</head>
+
+<body>
+	<nav class="navbar navbar-light bg-dark text-white">
+		<div class="text-center p-2">
+			<h2>Patrimônio Histórico</h2>
+		</div>
+		<div class="navbar-brand text-white">
+			<img src="uploads/usuario/imagem/<?=$_SESSION['admin']?'admin.jpg':'padrao.png'?>" width="50" height="50" class="d-inline-block align-top" style="border-radius:50%;">
+			Usuário: <?= $_SESSION['nome'] ?>
+			<a href="/sair" class="btn btn-danger">Sair</a>
+			<?php if($_SESSION['admin']){ ?>
+				<a href='/cadastro' class="btn btn-primary">Cadastro</a>
+			<?php } ?>
+		</div>
+	</nav>
+	
+	<?= $this->content() ?>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<style>
+body {
+  background: url(img/fundo.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+</style>
+<script>
+
+  const music = new Audio('som/n.mp3');
+  music.play();
+  music.loop =true;
+  music.playbackRate = 1;
+
+  localStorage.setItem('card_width', '20');
+  localStorage.setItem('img_card_height', '10');
+  function layout() {
+    $tipo = document.getElementById("layout").value;
+    switch($tipo) {
+      case 'cg':
+        localStorage.setItem('card_width', '40');
+        localStorage.setItem('img_card_height', '20');
+        document.body.style.setProperty('--d_patrimonio', 'inline-block');
+        document.body.style.setProperty('--d_tabela', 'none');
+        break;
+      case 'cm':
+        localStorage.setItem('card_width', '18');
+        localStorage.setItem('img_card_height', '10');
+        document.body.style.setProperty('--d_patrimonio', 'inline-block');
+        document.body.style.setProperty('--d_tabela', 'none');
+        break;
+      case 'cp':
+        localStorage.setItem('card_width', '15');
+        localStorage.setItem('img_card_height', '5');
+        document.body.style.setProperty('--d_patrimonio', 'inline-block');
+        document.body.style.setProperty('--d_tabela', 'none');
+        break;
+      case 'tb':
+        document.body.style.setProperty('--d_patrimonio', 'none');
+        document.body.style.setProperty('--d_tabela', 'block');
+        break;
+    }
+    var card_width = localStorage.getItem('card_width');
+    var img_card_height = localStorage.getItem('img_card_height');
+    document.body.style.setProperty('--card_width', card_width+'rem');
+    document.body.style.setProperty('--img_card_height', img_card_height+'rem');
+  }
+</script>
+<nav class="menu">
+  <ul>
+    <li>
+      <a href="/form_patrimonio?acao=criar" class="btn btn-success">Adicionar patrimonio</a><br>
+    </li>
+    <li>
+      <form action="/patrimonio" method="get">
+        <input type="text" name="pesquisa" id="pesquisa" placeholder="encontre mais rápido" value="<?=$this->view->pesquisa?>">
+        <button type="submit" id="buscar">BUSCAR</button>
+      </form>
+    </li>
+    <li>
+      <select name="layout" id="layout" onchange="layout()">
+        <option value="cg" id="cg">Cards Grandes</option>
+        <option value="cm" id="cm" selected>Cards Médios</option>
+        <option value="cp" id="cp">Cards Pequenos</option>
+        <option value="tb" id="tb">Tabela</option>
+      </select>
+      <label for="layout">Tipo de exibição</label>
+    </li>
+  </ul>
+</nav>
+
+<?php foreach($this->view->patrimonios as $patrimonio){ ?>
+  <div class="patrimonio">
+    <img src="<?=$patrimonio['imagem']?>">
+    <div>
+      <h5><?=$patrimonio['nome']?></h5>
+      <p class="text-justify font-monospace"><?=substr($patrimonio['descricao'], 0, 100)?></p>
+      <a href="<?=$patrimonio['localizacao']?>" class="btn btn-outline-success" target="_blank">Google Maps</a>
+      <p>Autor: <?=$patrimonio['fk_idusuario']?></p>
+      <?php if($_SESSION['admin'] || $_SESSION['nome']==$patrimonio['fk_idusuario']){ ?>
+				<a href='/form_patrimonio?idpatrimonio=<?=$patrimonio['idpatrimonio']?>&acao=editar' class="btn btn-sm btn-primary">Editar</a>
+        <a href='/deletar_patrimonio?idpatrimonio=<?=$patrimonio['idpatrimonio']?>' class="btn btn-sm btn-danger">Deletar</a>
+			<?php } ?>
+    </div>
+  </div>
+<?php } ?>
+
+<table class="tabela table bg-white">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Descricao</th>
+      <th scope="col">Imagem</th>
+      <th scope="col">Localizacao</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($this->view->patrimonios as $patrimonio){ ?>
+    <tr>
+      <td><?=$patrimonio['nome']?></td>
+      <td><?=substr($patrimonio['descricao'], 0, 100)?></td>
+      <td><?=$patrimonio['imagem']?></td>
+      <td><?=$patrimonio['localizacao']?></td>
+      <?php if($_SESSION['admin'] || $_SESSION['nome']==$patrimonio['fk_idusuario']){ ?>
+      <td>
+        <a href='/form_patrimonio?idpatrimonio=<?=$patrimonio['idpatrimonio']?>&acao=editar' class="btn btn-sm btn-primary">Editar</a>
+      </td>
+      <td>
+        <a href='/deletar_patrimonio?idpatrimonio=<?=$patrimonio['idpatrimonio']?>' class="btn btn-sm btn-danger">Deletar</a>
+      </td>
+      <?php } ?>
+    </tr>
+  <?php } ?>
+  </tbody>
+</table>

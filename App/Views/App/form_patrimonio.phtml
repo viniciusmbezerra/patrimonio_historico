@@ -1,0 +1,67 @@
+<form action="/<?= $this->view->acao ?>_patrimonio" method="POST" enctype="multipart/form-data" class="form_patrimonio">
+    <h1 class="p-3 h3"><?= ucfirst($this->view->acao) ?> Patrimônio</h1>
+
+    <div class="input-group flex-nowrap my-2">
+        <input type="hidden" name="idpatrimonio" value="<?= $this->view->infoPatrimonio['idpatrimonio'] ?>">
+    </div>
+        
+    <div class="input-group flex-nowrap my-2">
+        <span class="input-group-text">Nome</span>
+        <input type="text" name="nome" class="form-control" placeholder="Ex: Ciri Cascudo" value="<?= $this->view->infoPatrimonio['nome'] ?>"><br>
+    </div>
+
+    <div class="input-group flex-nowrap my-2">
+        <span class="input-group-text">Descrição</span>
+        <textarea name="descricao" id="descricao" cols="150" rows="6"><?= $this->view->infoPatrimonio['descricao'] ?></textarea>
+    </div>
+
+    <div class="input-group flex-nowrap my-2">
+        <span class="input-group-text">Localização</span>
+        <input type="url" name="localizacao" class="form-control" placeholder="link do google maps" value="<?= $this->view->infoPatrimonio['localizacao'] ?>">
+    </div>
+
+    <div class="mb-3" id="img">
+        <label for="file_img">Imagem do Patrimônio</label>
+        <input class="form-control" type="file" id="file_img" name="imagem" onchange="preview()">
+        <img id="photo" src="<?= $this->view->infoPatrimonio['imagem'] ?>" alt="">
+        <div class="btn btn-danger" id="cancelar" onclick="cancelar()" style="display: none;">Cancelar</div>
+    </div>
+    <script>
+        var img = document.getElementById('photo').src;
+        document.body.style.setProperty('--bg', 'url('+img+')');
+        localStorage.setItem('imagem', '');
+
+        function cancelar() {
+            document.getElementById('file_img').value='';
+            document.getElementById('photo').src=localStorage.getItem('imagem');
+            document.getElementById('cancelar').style.display='none';
+            document.body.style.setProperty('--bg', 'url('+localStorage.getItem('imagem')+')');
+        }
+        function preview() {
+            let file = document.getElementById('file_img');
+            
+            let photo = document.getElementById('photo');
+            if(localStorage.getItem('imagem')=='') {
+                localStorage.setItem('imagem', photo.src);
+            }
+
+            document.getElementById('cancelar').style.display='inline-block';
+
+            let reader = new FileReader();
+
+            reader.onload = () => {
+                photo.src = reader.result;
+                document.body.style.setProperty('--bg', 'url('+reader.result+')');
+            }
+
+            reader.readAsDataURL(file.files[0])
+        }
+    </script>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn btn-success mb-5"><?= ucfirst($this->view->acao) ?></button>
+    </div>
+    <div class="d-grid gap-2">
+        <a href='/patrimonio' class="btn btn-sm btn-warning">Voltar</a>
+    </div>
+</form>

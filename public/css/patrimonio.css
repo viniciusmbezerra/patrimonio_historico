@@ -1,0 +1,88 @@
+:root {
+    --card_width: 18rem;
+    --img_card_height: 10rem;
+    --d_patrimonio: inline-block;
+    --d_tabela: none;
+}
+.tabela {
+    display: var(--d_tabela);
+}
+.patrimonio {
+    background-image: radial-gradient(white, white, rgba(255, 255, 255, 0.337));
+    color: #000;
+    font-size: 1em;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    height: 100%;
+    width: var(--card_width);
+    display: var(--d_patrimonio);
+}
+.patrimonio > img {
+    width: 100%;
+    height: var(--img_card_height);
+    object-fit: cover;
+}
+.menu {
+    background: rgb(0, 40, 95);
+    color: black;
+    border-top: black solid 1px;
+    border-bottom: black solid 1px;
+    padding: .6rem 0rem;
+}
+.menu > ul {
+    list-style: none;
+}
+.menu > ul > li {
+    width: 33%;
+    display: inline-block;
+    height: 100%;
+    margin: 0 auto;
+}
+.menu > ul > li > select {
+    margin-right: -5px;
+    position: relative;
+    top: 3px;
+    height: 2.5rem;
+    width: max-content;
+    height: 2.5rem;
+    border-radius: 10px 0px 0px 10px ;
+    padding: 5px;
+    font-size: 1.125rem;
+    outline: none;
+    overflow: none;
+    border: rgb(4, 71, 255) solid 1px;
+}
+.menu > ul > li > label {
+    height: 2.5rem;
+    border: solid blue 1px;
+    border-radius: 0px 10px 10px 0px;
+    background: blue;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+#pesquisa {
+    margin-right: -5px;
+    position: relative;
+    top: 1px;
+    width: max-content;
+    height: 2.5rem;
+    border-radius: 10px 0px 0px 10px ;
+    padding: 5px;
+    font-size: 1.125rem;
+    outline: none;
+    overflow: none;
+    border: rgb(4, 71, 255) solid 1px;
+}
+#buscar {
+    height: 2.5rem;
+    border: solid blue 1px;
+    border-radius: 0px 10px 10px 0px;
+    background: blue;
+    color: white;
+}
+#buscar:hover {
+    background: rgb(0, 0, 140);
+    transition: .2s;
+}
