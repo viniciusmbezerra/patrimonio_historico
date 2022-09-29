@@ -10,13 +10,13 @@ class Route extends Bootstrap {
 
 		//rotas da index
 		$routes['lib'] = array(
-			'route' => '/',
+			'route' => '/lib',
 			'controller' => 'indexController',
 			'action' => 'lib'
 		);
 
 		$routes['login'] = array(
-			'route' => '/login',
+			'route' => '/',
 			'controller' => 'indexController',
 			'action' => 'login'
 		);
