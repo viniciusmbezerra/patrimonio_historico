@@ -1,0 +1,32 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Staatliches&display=swap');
+
+/*
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Staatliches', cursive;
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    
+    font-family: 'Quicksand', sans-serif;
+}
+
+li, a {
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+:root {
+    --fundo_01: #ffffff;
+    --fundo_02: #41dcff;
+    --fundo_03: #38a9ff;
+    --fundo_04: #89cbfe;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+}
